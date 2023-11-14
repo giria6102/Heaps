@@ -1,0 +1,16 @@
+ int kthSmallest(int arr[], int l, int r, int k) {  // T(c)=O(n)
+        //push first k elements 
+        priority_queue<int>pq;
+        for(int i=0;i<k;i++){
+            pq.push(arr[i]);
+        }
+        
+        // push elements after k and check if any smaller element present
+        for(int i=k;i<=r;i++){
+            if(arr[i]<pq.top()){
+                pq.pop();
+                pq.push(arr[i]);
+            }
+        }
+        return pq.top();
+    }
