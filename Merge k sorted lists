@@ -1,0 +1,70 @@
+T(c)=N*k*log(k)
+S(c)=O(k)
+
+class compare{
+public:
+bool operator()(Node*a,Node*b){
+    return a->data>b->data;
+}
+};
+Node* mergeKLists(vector<Node*> &listArray){
+      priority_queue<Node*,vector<Node*>,compare>pq;  //priotiy queue for using heapify
+
+ 
+
+    int k=listArray.size(); 
+
+ 
+
+    if(k==0) return NULL;
+
+ 
+
+    Node* head=NULL;    //to store answer list
+
+    Node* tail=NULL;
+
+    for(int i=0;i<k;i++){
+
+               //if i th list is not null then push the head of that list into pq
+
+            pq.push(listArray[i]);
+
+        
+
+    }
+
+ 
+
+    while(pq.size()>0){
+
+        Node*top=pq.top();  
+
+        pq.pop();
+
+ 
+
+        if(top->next!=NULL){
+
+           pq.push(top->next);  //if list is not empty yet push further elements of the list into the pq
+
+        }
+
+        if(head==NULL){
+
+            head=top;       //for inserting first element in the answer list
+
+            tail=top;
+
+        }else{
+
+            tail->next=top;     //for inserting remaing elements in the answer list
+
+            tail=top;
+
+        }
+
+    }
+
+    return head;
+}
